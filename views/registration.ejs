@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register for <%= event.game %></title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome CDN for icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <nav class="bg-blue-600 p-4 flex justify-between items-center">
+    <a href="/main" class="text-white text-xl">EsportMent</a>
+    <div class="flex items-center">
+      <!-- Search Input -->
+      <input type="text" placeholder="Search Players..." class="p-2 rounded bg-gray-200 mr-4">
+      <!-- Profile Icon with link to the profile page -->
+      <a href="/profile" class="text-grey-300 text-2xl h-8 w-8 flex justify-center items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-8 w-8">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 18.364a1 1 0 01.707-1.707 7 7 0 0112.486 0 1 1 0 01.707 1.707 9 9 0 00-13.9 0zM12 14a5 5 0 10-5-5 5 5 0 005 5z" />
+        </svg>
+      </a>      
+    </div>
+  </nav>
+
+  <!-- Registration Form -->
+  <div class="max-w-4xl mx-auto mt-12 bg-white p-8 rounded-lg shadow-lg">
+    <h1 class="text-2xl font-bold mb-6">Register for <%= event.game %> Tournament</h1>
+
+    <!-- Form starts here -->
+    <form action="/register/<%= event._id %>" method="POST">
+      <!-- Team Name -->
+      <div class="mb-4">
+        <label for="teamName" class="block text-lg font-semibold mb-2">Team Name</label>
+        <input type="text" id="teamName" name="teamName" required class="w-full p-2 border border-gray-300 rounded">
+      </div>
+
+      <!-- Dynamic Registration Number Inputs based on event.teamSize -->
+      <div id="teamMembers" class="mb-4">
+        <h3 class="text-lg font-semibold mb-4">Enter Registration Numbers</h3>
+        <% for (let i = 1; i <= event.teamSize; i++) { %>
+          <div class="mb-4">
+            <label for="member<%= i %>" class="block text-md mb-2">Member <%= i %> Registration Number</label>
+            <input type="number" id="member<%= i %>" name="members[]" required class="w-full p-2 border border-gray-300 rounded">
+          </div>
+        <% } %>
+      </div>
+
+      <!-- Payment Link -->
+      <div class="mb-4">
+        <label for="paymentLink" class="block text-lg font-semibold mb-2">Payment Link</label>
+        <input type="url" id="paymentLink" name="paymentLink" required class="w-full p-2 border border-gray-300 rounded">
+      </div>
+
+      <!-- Confirmation Checkbox -->
+      <div class="mb-4">
+        <label class="inline-flex items-center">
+          <input type="checkbox" id="confirmRegistration" name="confirmRegistration" required class="mr-2">
+          <span class="text-md">Confirm Registration</span>
+        </label>
+      </div>
+
+      <!-- Register Button -->
+      <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white p-3 rounded-lg text-lg">
+        Register
+      </button>
+    </form>
+
+  </div>
+
+</body>
+</html>

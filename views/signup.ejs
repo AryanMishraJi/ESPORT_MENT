@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 h-screen flex justify-center items-center font-sans">
+
+    <!-- Sign Up Container -->
+    <div class="bg-white p-10 rounded-lg shadow-lg max-w-lg w-full">
+        <h1 class="text-center text-2xl font-bold mb-6 text-gray-800">Sign Up</h1>
+
+        <!-- Sign Up Form -->
+        <form id="signupForm" action="/signup" method="POST">
+            <div class="mb-4">
+                <label for="name" class="block text-gray-700 mb-2">Full Name</label>
+                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" id="name" name="name" placeholder="Enter your full name" required>
+            </div>
+
+            <div class="mb-4">
+                <label for="registrationNumber" class="block text-gray-700 mb-2">Registration Number</label>
+                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" id="registrationNumber" name="registrationNumber" placeholder="Enter your 8-digit registration number" maxlength="8" required pattern="\d{8}">
+                <div id="regError" class="text-red-500 text-sm mt-1"></div>
+            </div>
+
+            <div class="mb-4">
+                <label for="phone" class="block text-gray-700 mb-2">Phone Number</label>
+                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" id="phone" name="phone" placeholder="Enter your 10-digit phone number" maxlength="10" required pattern="\d{10}">
+                <div id="phoneError" class="text-red-500 text-sm mt-1"></div>
+            </div>
+
+            <div class="mb-4">
+                <label for="email" class="block text-gray-700 mb-2">Email Address</label>
+                <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" id="email" name="email" placeholder="Enter your email" required>
+                <div id="emailError" class="text-red-500 text-sm mt-1"></div>
+            </div>
+
+            <div class="mb-4">
+                <label for="password" class="block text-gray-700 mb-2">Password</label>
+                <input type="password" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+
+            <div class="mb-4">
+                <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition-colors duration-200">Sign Up</button>
+            </div>
+
+            <div class="text-center mt-4 text-gray-600">
+                Already have an account? <a href="/login" class="text-blue-600 hover:text-blue-800">Log in here</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- JavaScript for Form Validation -->
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            const emailInput = document.getElementById('email');
+            const emailError = document.getElementById('emailError');
+            const emailValue = emailInput.value;
+
+            const regInput = document.getElementById('registrationNumber');
+            const regError = document.getElementById('regError');
+            const regValue = regInput.value;
+
+            const phoneInput = document.getElementById('phone');
+            const phoneError = document.getElementById('phoneError');
+            const phoneValue = phoneInput.value;
+
+            // Check if the email ends with @mnnit.ac.in
+            if (!emailValue.endsWith('@mnnit.ac.in')) {
+                event.preventDefault();  // Prevent form submission
+                emailError.textContent = 'Email must end with @mnnit.ac.in';
+                emailInput.classList.add('border-red-500');  // Highlight the email field
+            } else {
+                emailError.textContent = '';  // Clear the error message
+                emailInput.classList.remove('border-red-500');  // Remove error highlight
+            }
+
+            // Validate registration number (must be 8 digits)
+            if (!/^\d{8}$/.test(regValue)) {
+                event.preventDefault();  // Prevent form submission
+                regError.textContent = 'Registration number must be 8 digits.';
+                regInput.classList.add('border-red-500');
+            } else {
+                regError.textContent = '';
+                regInput.classList.remove('border-red-500');
+            }
+
+            // Validate phone number (must be 10 digits)
+            if (!/^\d{10}$/.test(phoneValue)) {
+                event.preventDefault();  // Prevent form submission
+                phoneError.textContent = 'Phone number must be 10 digits.';
+                phoneInput.classList.add('border-red-500');
+            } else {
+                phoneError.textContent = '';
+                phoneInput.classList.remove('border-red-500');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= event.game %> Tournament</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: url("<%= event.image %>") no-repeat center center fixed;
+      background-size: cover;
+    }
+  </style>
+</head>
+<body class="relative text-white font-sans">
+
+  <div class="absolute inset-0 bg-black opacity-60"></div>
+
+  <div class="relative z-10 p-12 text-center">
+    <a href="/main" class="absolute top-5 right-5 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded">
+      Back
+    </a>
+
+    <div class="bg-white text-gray-900 p-8 rounded-lg max-w-lg mx-auto shadow-lg">
+      <h2 class="text-3xl font-bold mb-6"><%= event.game %> Tournament</h2>
+      <p><strong>Date:</strong> <%= event.date %></p>
+      <p><strong>Time:</strong> <%= event.time %></p>
+      <p><strong>Organizer:</strong> <%= event.organizer %></p>
+      <p><strong>Entry Fee:</strong> ₹<%= event.entryFee %></p>
+      <p><strong>Prize Pool:</strong> ₹<%= event.prizePool %></p>
+    </div>
+    
+    <a href="/register/<%= event._id %>">
+      <button class="mt-12 bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded uppercase text-lg">
+        Register Now
+      </button>
+    </a>
+  </div>
+
+</body>
+</html>

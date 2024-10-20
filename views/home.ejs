@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esportment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="h-screen m-0">
+
+    <div class="fixed top-0 left-0 w-20 h-full bg-gray-800 flex flex-col items-center pt-5">
+        <a href="#" class="text-white mb-5 text-2xl hover:text-yellow-500 transition-colors">
+            <i class="fas fa-home"></i>
+        </a>
+        <a href="#" class="text-white mb-5 text-2xl hover:text-yellow-500 transition-colors">
+            <i class="fas fa-trophy"></i>
+        </a>
+        <a href="/profile" class="text-white mb-5 text-2xl hover:text-yellow-500 transition-colors">
+            <i class="fas fa-user"></i>
+        </a>
+        <a href="#" class="text-white text-2xl hover:text-yellow-500 transition-colors">
+            <i class="fas fa-cog"></i>
+        </a>
+    </div>
+
+    <div class="ml-20 w-full h-full overflow-y-auto">
+
+        <div class="h-3/5 w-full bg-gray-400 flex justify-center items-center">
+            <div class="text-center">
+                <div class="text-6xl font-bold font-mono mb-6">Esportment</div>
+                <% if (!authToken) { %>
+                    <div class="mt-6 space-x-4">
+                        <a href="/login">
+                            <button class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition">Login</button>
+                        </a>
+                        <a href="/signup">
+                            <button class="bg-gray-600 text-white py-2 px-4 rounded hover:bg-gray-700 transition">Signup</button>
+                        </a>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+
+        <div class="w-full bg-gray-100 p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <% events.forEach(event => { %>
+                    <% if (authToken) { %>
+                        <a href="/event/<%= event._id %>" class="block bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                            <img src="<%= event.image %>" alt="Event Image" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <h2 class="text-lg font-bold text-blue-600 mb-2"><%= event.game %> Tournament</h2>
+                                <p class="text-sm text-gray-700"><strong>Date:</strong> <%= event.date %></p>
+                                <p class="text-sm text-gray-700"><strong>Time:</strong> <%= event.time %></p>
+                                <p class="text-sm text-gray-700"><strong>Organizer:</strong> <%= event.organizer %></p>
+                                <p class="text-sm text-gray-700"><strong>Entry Fee:</strong> ₹<%= event.entryFee %></p>
+                                <p class="text-sm text-gray-700"><strong>Prize Pool:</strong> ₹<%= event.prizePool %></p>
+                            </div>
+                        </a>
+                    <% } else { %>
+                        <a href="/login" class="block bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                            <img src="<%= event.image %>" alt="Event Image" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <h2 class="text-lg font-bold text-blue-600 mb-2"><%= event.game %> Tournament</h2>
+                                <p class="text-sm text-gray-700"><strong>Date:</strong> <%= event.date %></p>
+                                <p class="text-sm text-gray-700"><strong>Time:</strong> <%= event.time %></p>
+                                <p class="text-sm text-gray-700"><strong>Organizer:</strong> <%= event.organizer %></p>
+                                <p class="text-sm text-gray-700"><strong>Entry Fee:</strong> ₹<%= event.entryFee %></p>
+                                <p class="text-sm text-gray-700"><strong>Prize Pool:</strong> ₹<%= event.prizePool %></p>
+                            </div>
+                        </a>
+                    <% } %>
+                <% }); %>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
