@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
             maxAge: 24*3600000, 
         });
 
-        res.redirect('/main');
+        res.redirect('/');
     } catch (err) {
         console.error(err);
         res.send('Error logging in: ' + err.message);

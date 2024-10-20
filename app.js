@@ -10,7 +10,6 @@ const PORT = 3000;
 
 const loginRoute = require('./routes/login');
 const signinRoute = require('./routes/signup');
-const main = require('./routes/main');
 const owner = require('./routes/owner');
 const createGame = require('./routes/creategame');
 const GameDetail = require('./routes/event');
@@ -44,8 +43,7 @@ app.post('/logout', (req, res) => {
   res.clearCookie('authToken'); 
   res.status(200).send('Logged out successfully'); 
 });
-
-app.use('/main', authenticate, main);     
+ 
 app.use('/event', authenticate, GameDetail);
 app.use('/register', authenticate, registerGame);
 app.use('/profile', authenticate, profilePage);
